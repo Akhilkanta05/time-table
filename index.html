@@ -3,116 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Class Scheduler</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      padding: 20px;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .button {
-      background-color: #3b82f6;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .button:hover {
-      background-color: #2563eb;
-    }
-    .progress-bar {
-      height: 10px;
-      background: #3b82f6;
-      border-radius: 5px;
-    }
-    .progress-container {
-      width: 100%;
-      background: #e5e7eb;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-    .class-info {
-      margin: 10px 0;
-    }
-  </style>
+  <title>Class Reminder App</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    rel="stylesheet"
+  />
 </head>
 <body>
-  <div class="container">
-    <div id="current-time">Current Time: </div>
-    <div id="current-class">
-      <p>No current class</p>
-    </div>
-    <button class="button" id="add-class-btn">Add Class</button>
-  </div>
-
-  <script>
-    // Sample schedule data
-    const schedule = [
-      { id: 1, name: "R-LAB", time: "08:00 AM", day: "Monday", room: "Room 428", color: "#3B82F6", notified: false },
-      { id: 2, name: "JAVA", time: "10:00 AM", day: "Monday", room: "Room 412", color: "#EF4444", notified: false },
-      // Add more schedule data as needed
-    ];
-
-    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-    // Update current time
-    function updateTime() {
-      const now = new Date();
-      document.getElementById("current-time").textContent = `Current Time: ${now.toLocaleTimeString()}`;
-      updateCurrentClass();
-    }
-
-    // Find and display the current class
-    function updateCurrentClass() {
-      const now = new Date();
-      const currentDay = daysOfWeek[now.getDay()];
-      const currentClass = schedule.find(class_ => {
-        const [hours, minutes] = class_.time.split(":");
-        const classTime = new Date();
-        classTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
-        const nextClassTime = new Date(classTime);
-        nextClassTime.setMinutes(nextClassTime.getMinutes() + 60);
-        return class_.day === currentDay && now >= classTime && now < nextClassTime;
-      });
-
-      const currentClassContainer = document.getElementById("current-class");
-      if (currentClass) {
-        const remainingTime = new Date(new Date().setHours(...currentClass.time.split(':'))) - now;
-        currentClassContainer.innerHTML = `
-          <div class="class-info">
-            <strong>Current Class:</strong> ${currentClass.name} in ${currentClass.room}
-          </div>
-          <div class="class-info">
-            <strong>Time Remaining:</strong> ${Math.floor(remainingTime / 60000)} minutes
-          </div>
-          <div class="progress-container">
-            <div class="progress-bar" style="width: ${(remainingTime / 3600000) * 100}%"></div>
-          </div>
-        `;
-      } else {
-        currentClassContainer.innerHTML = "<p>No current class</p>";
-      }
-    }
-
-    // Add event listener to update time every second
-    setInterval(updateTime, 1000);
-
-    // Add class functionality (example placeholder)
-    document.getElementById("add-class-btn").addEventListener("click", () => {
-      alert("Add class functionality is not yet implemented.");
-    });
-
-    // Initialize
-    updateTime();
-  </script>
+  <div id="root" class="min-h-screen bg-transparent px-4 py-6"></div>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
+
